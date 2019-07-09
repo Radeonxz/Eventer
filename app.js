@@ -17,7 +17,12 @@ app.use('/graphql', graphqlHttp({
   graphiql: true
 }));
 
-mongoose.connect(process.env.MONGO_URL)
+const MongoDBOptions = {
+  useNewUrlParser: true,
+  useCreateIndex: true
+}
+
+mongoose.connect(process.env.MONGO_URL, MongoDBOptions)
 .then(() => {
   app.listen(3000);
 }).catch((err) => {
