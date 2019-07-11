@@ -24,6 +24,7 @@ const MongoDBOptions = {
 
 mongoose.connect(process.env.MONGO_URL, MongoDBOptions)
 .then(() => {
+  console.log('server is listening on 3000');
   app.listen(3000);
 }).catch((err) => {
   console.log(err);
