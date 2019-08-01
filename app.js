@@ -4,12 +4,16 @@ const mongoose = require('mongoose');
 
 const graphQlSchema = require('./graphql/schema/index');
 const graphQlResolvers = require('./graphql/resolvers/index');
+const isAuth = require('./middlewares/is-auth');
 
 const app = express();
 
 // Parse incoming request
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+// User auth middleware for all routes
+app.use(isAuth);
 
 app.use('/graphql', graphqlHttp({
   schema: graphQlSchema,
