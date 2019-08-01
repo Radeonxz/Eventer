@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const jwt = require('jasonwebtoken');
+const jwt = require('jsonwebtoken');
 
 const User = require('../../models/user');
 
@@ -26,7 +26,7 @@ module.exports = {
   },
 
   login: async ({email, password}) => {
-    const user = User.findOne({email: email});
+    const user = await User.findOne({email: email});
     if(!user) {
       throw new Error(`User: ${email} does not exist!`);
     }
