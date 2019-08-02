@@ -1,4 +1,5 @@
 const Event = require('../../models/event');
+const User = require('../../models/user');
 
 const { transformEvent } = require('./merge');
 
@@ -23,7 +24,7 @@ module.exports = {
       description: args.eventInput.description,
       price: +args.eventInput.price,
       date: new Date(args.eventInput.date),
-      creator: '5d241ecf3df8220cb495ee82'
+      creator: req.userId
     });
 
     let createdEvent;
