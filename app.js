@@ -12,6 +12,17 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+// CORS
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Method', 'POST, GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if(req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
+
 // User auth middleware for all routes
 app.use(isAuth);
 
@@ -26,10 +37,10 @@ const MongoDBOptions = {
   useCreateIndex: true
 }
 
-mongoose.connect(process.env.MONGO_URL, MongoDBOptions)
+mongoose.connect(process.env.MONGODB_URI, MongoDBOptions)
 .then(() => {
-  console.log('server is listening on 3000');
-  app.listen(3000);
+  console.log('server is listening on 8000');
+  app.listen(8000);
 }).catch((err) => {
   console.log(err);
 });
