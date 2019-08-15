@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 import Modal from '../../components/Modal/Modal';
 import Backdrop from '../../components/Backdrop/Backdrop';
 import AuthContext from '../../context/auth-context';
-import './Events.css'
+import './Events.css';
 
 class EventsPage extends Component {
   state = {
     creating: false,
-    event: []
+    events: []
   };
   
   static contextType = AuthContext;
@@ -22,19 +22,15 @@ class EventsPage extends Component {
   }
 
   componentDidMount() {
-    this.fetchEvents();
+    // this.fetchEvents();
   }
   
   startCreateEventHandler = () => {
-    console.log('this state1 is', this);
-    console.log('this state1 is', this.state);
-    this.setState({creating: true});
-    console.log('this state2 is', this);
-    console.log('this state2 is', this.state);
+    this.setState({ creating: true });
   };
 
   modalConfirmHandler = () => {
-    this.setState({creating: false});
+    this.setState({ creating: false });
     const title = this.titleElRef.current.value;
     const price = +this.priceElRef.current.value;
     const date = this.dateElRef.current.value;
@@ -47,12 +43,12 @@ class EventsPage extends Component {
       return;
     }
 
-    const event = {title, price, date, description};
+    const event = { title, price, date, description };
 
     const requestBody = {
       query: `
         mutation {
-          createEvent(eventInput: {title: '${title}', description: '${description}', price: ${price}, date: '${date}'}) {
+          createEvent(eventInput: {title: "${title}", description: "${description}", price: ${price}, date: "${date}"}) {
             _id
             title
             description
@@ -90,21 +86,23 @@ class EventsPage extends Component {
   };
 
   modalCancelHandler = () => {
-    this.setState({creating: false});
+    this.setState({ creating: false });
   };
 
   fetchEvents() {
     const requestBody = {
       query: `
         query {
-          _id
-          title
-          description
-          date
-          price
-          creator {
+          events {
             _id
-            email
+            title
+            description
+            date
+            price
+            creator {
+              _id
+              email
+            }
           }
         }
       `
@@ -124,7 +122,7 @@ class EventsPage extends Component {
       return res.json();
     }).then(resData => {
       const events = resData.data.events;
-      this.setState({events: events});
+      this.setState({ events: events });
     }).catch(err => {
       console.log(err);
     });
