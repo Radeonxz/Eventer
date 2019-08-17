@@ -15,6 +15,8 @@ class EventsPage extends Component {
     isLoading: false
   };
   
+  isActive = true;
+
   static contextType = AuthContext;
 
   constructor(props) {
@@ -63,14 +65,12 @@ class EventsPage extends Component {
       `
     };
 
-    const token = this.context.token;
-
     fetch('http://localhost:8000/graphql', {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token
+        'Authorization': 'Bearer ' + this.context.token
       }
     }).then(res => {
       if(res.status !== 200 && res.status !== 201) {
@@ -146,26 +146,67 @@ class EventsPage extends Component {
       return res.json();
     }).then(resData => {
       const events = resData.data.events;
-      this.setState({ events: events, isLoading: false });
+      if(this.isActive) {
+        this.setState({ events: events, isLoading: false });
+      }
+    }).catch(err => {
+      console.log(err);
+      if(this.isActive) {
+        this.setState({ isLoading: false });
+      }
+    });
+  };
+
+  showDetailHandler = eventId => {
+    this.setState(prevState => {
+      const selectedEvent = prevState.events.find(e => e._id === eventId);
+      return { selectedEvent: selectedEvent };
+    });
+  };
+
+  bookEventHandler = () => {
+    if(!this.context.token) {
+      this.setState({ selectedEvent: null });
+      return;
+    }
+    const requestBody = {
+      query: `
+        mutation {
+          bookEvent(eventId: "${this.state.selectedEvent._id}") {
+            _id
+            createdAt
+            updatedAt
+          }
+        }
+      `
+    }
+
+    fetch('http://localhost:8000/graphql', {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.context.token
+      }
+    }).then(res => {
+      if(res.status !== 200 && res.status !== 201) {
+        throw new Error('Failed!');
+      }
+
+      return res.json();
+    }).then(resData => {
+      this.setState({ selectedEvent: null });
     }).catch(err => {
       console.log(err);
       this.setState({ isLoading: false });
     });
   };
 
-  showDetailHandler = eventId => {
-    console.log('111', eventId);
-    this.setState(prevState => {
-      const selectedEvent = prevState.events.find(e => e._id === eventId);
-      console.log('selectedEvent is', selectedEvent);
-      return { selectedEvent: selectedEvent };
-    });
-  };
-
-  bookEventHandler = () => {};
+  componentWillUnmount() {
+    this.isActive = false;
+  }
 
   render() {
-    console.log('this.state is', this.state);
     return (
       <React.Fragment>
         {(this.state.creating || this.state.selectedEvent) && <Backdrop />}
@@ -205,7 +246,7 @@ class EventsPage extends Component {
             canConfirm
             onCancel={this.modalCancelHandler}
             onConfirm={this.bookEventHandler}
-            confirmText='Book'
+            confirmText={this.context.token ? 'Book' : 'Confirm'}
           >
             <h1>{this.state.selectedEvent.title}</h1>
             <h2>
