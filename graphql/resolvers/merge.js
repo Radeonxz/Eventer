@@ -26,7 +26,7 @@ const events = async eventIds => {
 const singleEvent = async eventId => {
   try{
     // const event = await Event.findById(eventId);
-    const event = await eventLoader.load(eventId);
+    const event = await eventLoader.load(eventId.toString());
     return event;
   } catch(err) {
     throw err;
@@ -36,7 +36,7 @@ const singleEvent = async eventId => {
 const user = async userId => {
   try{  
     // const user = await User.findById(userId);
-    const user = await userLoader.load(userId);
+    const user = await userLoader.load(userId.toString());
     return {
       ...user._doc,
       _id: user.id,
