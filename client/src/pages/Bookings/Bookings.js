@@ -34,7 +34,7 @@ class BookingsPage extends Component {
           }
         }
       `
-    }
+    };
 
     fetch('http://localhost:8000/graphql', {
       method: 'POST',
@@ -72,7 +72,7 @@ class BookingsPage extends Component {
       variables: {
         id: bookingId
       }
-    }
+    };
 
     fetch('http://localhost:8000/graphql', {
       method: 'POST',
