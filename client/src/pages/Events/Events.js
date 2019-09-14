@@ -96,17 +96,6 @@ class EventsPage extends Component {
             _id: this.context.userId
           }
         }];
-        // const updatedEvents = [...prevState.events];
-        // updatedEvents.push({
-        //   _id: resData.data.createEvent._id,
-        //   title: resData.data.createEvent.title,
-        //   description: resData.data.createEvent.description,
-        //   date: resData.data.createEvent.date,
-        //   price: resData.data.createEvent.price,
-        //   creator: {
-        //     _id: this.context.userId
-        //   }
-        // });
         return { events: updatedEvents };
       });
     }).catch(err => {
@@ -136,7 +125,7 @@ class EventsPage extends Component {
           }
         }
       `
-    }
+    };
 
     fetch('http://localhost:8000/graphql', {
       method: 'POST',

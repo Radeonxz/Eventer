@@ -45,7 +45,7 @@ class AuthPage extends Component {
         email: email,
         password: password
       }
-    }
+    };
 
     if(!this.state.isLogin) {
       requestBody = {
