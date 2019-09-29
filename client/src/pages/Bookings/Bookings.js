@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import AuthContext from '../../context/auth-context';
 import BookingList from '../../components/Bookings/BookingList/BookingList';
 import BookingChart from '../../components/Bookings/BookingChart/BookingChart';
+import BookingControl from '../../components/Bookings/BookingControl/BookingControl';
 import Spinner from '../../components/Spinner/Spinner';
 
 class BookingsPage extends Component {
@@ -113,6 +114,10 @@ class BookingsPage extends Component {
     if(!this.state.isLoading) {
       content = (
         <React.Fragment>
+          <BookingControl
+            activeOutputType={this.state.outputType}
+            onChange={this.changeOutputTypeHandler}
+          />
           <div>
             {this.state.outputType === 'list' ? (
               <BookingList

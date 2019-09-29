@@ -8,11 +8,16 @@
   border: none;
   background: transparent;
   color: black;
-  padding: 0.25rem 1rem;
+  padding: 0.25rem 3rem;
   border-bottom: 2px solid transparent;
+  cursor: pointer;
 }
 
 .booking-control button.active {
   border-bottom: 2px solid coral;
   color: coral;
+}
+
+.booking-control button:focus {
+  outline: none;
 }
