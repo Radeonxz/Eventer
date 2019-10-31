@@ -1,4 +1,5 @@
 import React from 'react';
+import { BarChart } from 'react-chartjs-2';
 
 const BOOKINGS_BUCKETS = {
   'Cheap': {
@@ -30,7 +31,7 @@ const bookingsChart = props => {
     }, 0)
     output[bucket] = filteredBookingsCount
   }
-  return <p>The Chart!</p>;
+  return <BarChart />;
 };
 
 export default bookingsChart;
