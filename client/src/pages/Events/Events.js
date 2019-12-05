@@ -14,7 +14,7 @@ class EventsPage extends Component {
     selectedEvent: null,
     isLoading: false
   };
-  
+
   isActive = true;
 
   static contextType = AuthContext;
@@ -30,7 +30,7 @@ class EventsPage extends Component {
   componentDidMount() {
     this.fetchEvents();
   }
-  
+
   startCreateEventHandler = () => {
     this.setState({ creating: true });
   };
@@ -42,10 +42,10 @@ class EventsPage extends Component {
     const date = this.dateElRef.current.value;
     const description = this.descriptionElRef.current.value;
 
-    if(title.trim().length === 0 ||
-    price <= 0 ||
-    date.trim().length === 0 ||
-    description.trim().length === 0) {
+    if (title.trim().length === 0 ||
+      price <= 0 ||
+      date.trim().length === 0 ||
+      description.trim().length === 0) {
       return;
     }
 
@@ -79,7 +79,7 @@ class EventsPage extends Component {
         'Authorization': 'Bearer ' + this.context.token
       }
     }).then(res => {
-      if(res.status !== 200 && res.status !== 201) {
+      if (res.status !== 200 && res.status !== 201) {
         throw new Error('Failed');
       }
 
@@ -134,19 +134,19 @@ class EventsPage extends Component {
         'Content-Type': 'application/json'
       }
     }).then(res => {
-      if(res.status !== 200 && res.status !== 201) {
+      if (res.status !== 200 && res.status !== 201) {
         throw new Error('Failed!');
       }
 
       return res.json();
     }).then(resData => {
       const events = resData.data.events;
-      if(this.isActive) {
+      if (this.isActive) {
         this.setState({ events: events, isLoading: false });
       }
     }).catch(err => {
       console.log(err);
-      if(this.isActive) {
+      if (this.isActive) {
         this.setState({ isLoading: false });
       }
     });
@@ -160,7 +160,7 @@ class EventsPage extends Component {
   };
 
   bookEventHandler = () => {
-    if(!this.context.token) {
+    if (!this.context.token) {
       this.setState({ selectedEvent: null });
       return;
     }
@@ -187,7 +187,7 @@ class EventsPage extends Component {
         'Authorization': 'Bearer ' + this.context.token
       }
     }).then(res => {
-      if(res.status !== 200 && res.status !== 201) {
+      if (res.status !== 200 && res.status !== 201) {
         throw new Error('Failed!');
       }
 

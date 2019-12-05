@@ -46,7 +46,7 @@ class BookingsPage extends Component {
         'Authorization': 'Bearer ' + this.context.token
       }
     }).then(res => {
-      if(res.status !== 200 && res.status !== 201) {
+      if (res.status !== 200 && res.status !== 201) {
         throw new Error('Failed!');
       }
 
@@ -84,7 +84,7 @@ class BookingsPage extends Component {
         'Authorization': 'Bearer ' + this.context.token
       }
     }).then(res => {
-      if(res.status !== 200 && res.status !== 201) {
+      if (res.status !== 200 && res.status !== 201) {
         throw new Error('Failed!');
       }
 
@@ -103,7 +103,7 @@ class BookingsPage extends Component {
   };
 
   changeOutputTypeHandler = outputType => {
-    if(outputType === 'list') {
+    if (outputType === 'list') {
       this.setState({ outputType: 'list' });
     } else {
       this.setState({ outputType: 'chart' });
@@ -112,7 +112,7 @@ class BookingsPage extends Component {
 
   render() {
     let content = <Spinner />
-    if(!this.state.isLoading) {
+    if (!this.state.isLoading) {
       content = (
         <React.Fragment>
           <BookingControl
@@ -126,8 +126,8 @@ class BookingsPage extends Component {
                 onDelete={this.deleteBookingHandler}
               />
             ) : (
-              <BookingChart bookings={this.state.bookings} />
-            )}
+                <BookingChart bookings={this.state.bookings} />
+              )}
           </div>
         </React.Fragment>
       )
