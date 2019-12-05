@@ -18,7 +18,7 @@ class AuthPage extends Component {
 
   switchModelHandler = () => {
     this.setState(prevState => {
-      return {isLogin: !prevState.isLogin};
+      return { isLogin: !prevState.isLogin };
     });
   };
 
@@ -27,7 +27,7 @@ class AuthPage extends Component {
     const email = this.emailEl.current.value;
     const password = this.passwordEl.current.value;
 
-    if(email.trim().length === 0 || password.trim().length ===0) {
+    if (email.trim().length === 0 || password.trim().length === 0) {
       return;
     }
 
@@ -47,7 +47,7 @@ class AuthPage extends Component {
       }
     };
 
-    if(!this.state.isLogin) {
+    if (!this.state.isLogin) {
       requestBody = {
         query: `
           mutation CreateUser($email: String!, $password: String!) {
@@ -71,12 +71,12 @@ class AuthPage extends Component {
         'Content-Type': 'application/json'
       }
     }).then(res => {
-      if(res.status !== 200 && res.status !== 201) {
+      if (res.status !== 200 && res.status !== 201) {
         throw new Error('Failed');
       }
       return res.json();
     }).then(resData => {
-      if(resData.data.login.token) {
+      if (resData.data.login.token) {
         this.context.login(resData.data.login.token, resData.data.login.userId, resData.data.login.tokenExpiration);
       }
     }).catch(err => {

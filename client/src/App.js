@@ -17,18 +17,18 @@ class App extends Component {
   };
 
   login = (token, userId, tokenExpiration) => {
-    this.setState({token: token, userId: userId});
+    this.setState({ token: token, userId: userId });
   };
 
   logout = () => {
-    this.setState({token: null, userId: null});
+    this.setState({ token: null, userId: null });
   };
 
   render() {
     return (
       <BrowserRouter>
         <React.Fragment>
-          <AuthContext.Provider value={{token: this.state.token, userId: this.state.userId, login: this.login, logout: this.logout}}>
+          <AuthContext.Provider value={{ token: this.state.token, userId: this.state.userId, login: this.login, logout: this.logout }}>
             <MainNavigation />
             <main className='main-content'>
               <Switch>
