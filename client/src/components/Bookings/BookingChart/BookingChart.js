@@ -22,9 +22,9 @@ const bookingsChart = props => {
     datasets: []
   };
   let values = [];
-  for(const bucket in BOOKINGS_BUCKETS) {
+  for (const bucket in BOOKINGS_BUCKETS) {
     const filteredBookingsCount = props.bookings.reduce((prev, current) => {
-      if(
+      if (
         current.event.price > BOOKINGS_BUCKETS[bucket].min &&
         current.event.price < BOOKINGS_BUCKETS[bucket].max
       ) {
