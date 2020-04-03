@@ -1,23 +1,48 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './EventItem.css';
+import "./EventItem.css";
 
-const eventItem = props => (
-  <li key={props.eventId} className='events_list-item'>
+const EventItem = ({
+  eventId,
+  title,
+  price,
+  date,
+  userId,
+  creatorId,
+  onDetail
+}) => (
+  <li key={eventId} className="events_list-item">
     <div>
-      <h1>{props.title}</h1>
-      <h2>${props.price} - {new Date(props.date).toLocaleDateString()}</h2>
+      <h1>{title}</h1>
+      <h2>
+        ${price} - {new Date(date).toLocaleDateString()}
+      </h2>
     </div>
     <div>
-      {props.userId === props.creatorId ? (
+      {userId === creatorId ? (
         <p>Your are the owner of this event.</p>
       ) : (
-          <button className='btn' onClick={props.onDetail.bind(this, props.eventId)}>
-            View Details
+        <button className="btn" onClick={onDetail.bind(this, eventId)}>
+          View Details
         </button>
-        )}
+      )}
     </div>
   </li>
 );
 
-export default eventItem;
+EventItem.defaultProps = {
+  userId: ""
+};
+
+EventItem.propTypes = {
+  eventId: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  date: PropTypes.string.isRequired,
+  userId: PropTypes.string,
+  creatorId: PropTypes.string.isRequired,
+  onDetail: PropTypes.func.isRequired
+};
+
+export default EventItem;
