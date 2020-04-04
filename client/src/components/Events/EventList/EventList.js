@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-import EventItem from './EventItem/EventItem';
+import EventItem from "./EventItem/EventItem";
 
-import './EventList.css';
+import "./EventList.css";
 
-const eventList = props => {
-  const events = props.events.map(event => {
+const EventList = ({ events, authUserId, onViewDetail }) => {
+  const eventsList = events.map(event => {
     return (
       <EventItem
         key={event._id}
@@ -13,16 +14,29 @@ const eventList = props => {
         title={event.title}
         price={event.price}
         date={event.date}
-        userId={props.authUserId}
+        userId={authUserId}
         creatorId={event.creator._id}
-        onDetail={props.onViewDetail}
+        onDetail={onViewDetail}
       />
     );
   });
 
-  return (
-    <ul className='event_list'>{events}</ul>
-  )
+  return <ul className="event_list">{eventsList}</ul>;
 };
 
-export default eventList;
+EventList.propTypes = {
+  /**
+   * List of ecents
+   */
+  events: PropTypes.array.isRequired,
+  /**
+   * Current userId
+   */
+  authUserId: PropTypes.string,
+  /**
+   * Method to view event details
+   */
+  onViewDetail: PropTypes.func.isRequired
+};
+
+export default EventList;

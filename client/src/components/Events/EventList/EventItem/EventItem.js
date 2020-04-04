@@ -36,12 +36,33 @@ EventItem.defaultProps = {
 };
 
 EventItem.propTypes = {
+  /**
+   * EventId
+   */
   eventId: PropTypes.string.isRequired,
+  /**
+   * Event title
+   */
   title: PropTypes.string.isRequired,
+  /**
+   * Event price
+   */
   price: PropTypes.number.isRequired,
+  /**
+   * Event date
+   */
   date: PropTypes.string.isRequired,
+  /**
+   * Current userId
+   */
   userId: PropTypes.string,
+  /**
+   * Event creatorId
+   */
   creatorId: PropTypes.string.isRequired,
+  /**
+   * Method to view event details
+   */
   onDetail: PropTypes.func.isRequired
 };
 
