@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Modal from "../../components/Modal/Modal";
+import Modal from "../../components/Modal";
 import EventList from "../../components/Events/EventList/EventList";
 import Spinner from "../../components/Spinner/Spinner";
 import Backdrop from "../../components/Backdrop";
