@@ -1,28 +1,66 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './Modal.css';
+import "./styled/Modal.css";
 
-const modal = props => (
-  <div className='modal'>
-    <header className='modal_header'>
-      <h1>{props.title}</h1>
+const Modal = ({
+  title,
+  confirmText,
+  canCancel,
+  canConfirm,
+  onCancel,
+  onConfirm,
+  children,
+}) => (
+  <div className="modal">
+    <header className="modal_header">
+      <h1>{title}</h1>
     </header>
-    <section className='modal_content'>
-      {props.children}
-    </section>
-    <section className='modal_actions'>
-      {props.canCancel && (
-        <button className='btn' onClick={props.onCancel}>
+    <section className="modal_content">{children}</section>
+    <section className="modal_actions">
+      {canCancel && (
+        <button className="btn" onClick={onCancel}>
           Cancel
         </button>
       )}
-      {props.canConfirm && (
-        <button className='btn' onClick={props.onConfirm}>
-          {props.confirmText}
+      {canConfirm && (
+        <button className="btn" onClick={onConfirm}>
+          {confirmText}
         </button>
       )}
     </section>
   </div>
 );
 
-export default modal;
+Modal.propTypes = {
+  /**
+   * Modal title
+   */
+  title: PropTypes.string.isRequired,
+  /**
+   * Modal confirm text
+   */
+  confirmText: PropTypes.string.isRequired,
+  /**
+   * To cancel status
+   */
+  canCancel: PropTypes.bool.isRequired,
+  /**
+   * To confirm status
+   */
+  canConfirm: PropTypes.bool.isRequired,
+  /**
+   * Modal cancel onClick func
+   */
+  onCancel: PropTypes.func.isRequired,
+  /**
+   * Modal confirm onClick func
+   */
+  onConfirm: PropTypes.func.isRequired,
+  /**
+   * React children object
+   */
+  children: PropTypes.object.isRequired,
+};
+
+export default Modal;

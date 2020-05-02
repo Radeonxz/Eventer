@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import './Spinner.css';
+import "./styled/Spinner.css";
 
 const spinner = () => (
-  <div className='spinner'>
+  <div className="spinner">
     <div className="lds-roller">
       <div></div>
       <div></div>
