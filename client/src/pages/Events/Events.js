@@ -51,8 +51,6 @@ class EventsPage extends Component {
       return;
     }
 
-    const event = { title, price, date, description };
-
     const requestBody = {
       query: `
         mutation CreateEvent($title: String!, $desc: String!, $price: Float!, $date: String!) {
