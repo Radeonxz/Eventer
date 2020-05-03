@@ -29,9 +29,9 @@ BookingControl.propTypes = {
    */
   activeOutputType: PropTypes.string,
   /**
-   * Modal onChange func
+   * BookingControl onChange func
    */
-  onChange: PropTypes.string.isRequired
+  onChange: PropTypes.func.isRequired
 };
 
 export default BookingControl;

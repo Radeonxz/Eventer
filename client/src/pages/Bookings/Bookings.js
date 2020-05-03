@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import AuthContext from "../../context/auth-context";
 import Spinner from "../../components/Spinner";
 import BookingList from "../../components/Bookings/BookingList";
-import BookingChart from "../../components/Bookings/BookingChart/BookingChart";
+import BookingChart from "../../components/Bookings/BookingChart";
 import BookingControl from "../../components/Bookings/BookingControl";
 
 class BookingsPage extends Component {
