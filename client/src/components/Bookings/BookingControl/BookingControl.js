@@ -1,18 +1,19 @@
 import React from "react";
-import "./BookingControl.css";
+import PropTypes from "prop-types";
+import "./styled/BookingControl.css";
 
-const bookingControl = props => {
+const BookingControl = ({ activeOutputType, onChange }) => {
   return (
     <div className="booking-control">
       <button
-        className={props.activeOutputType === "list" ? "active" : ""}
-        onClick={props.onChange.bind(this, "list")}
+        className={activeOutputType === "list" ? "active" : ""}
+        onClick={onChange.bind(this, "list")}
       >
         List
       </button>
       <button
-        className={props.activeOutputType === "chart" ? "active" : ""}
-        onClick={props.onChange.bind(this, "chart")}
+        className={activeOutputType === "chart" ? "active" : ""}
+        onClick={onChange.bind(this, "chart")}
       >
         Chart
       </button>
@@ -20,4 +21,17 @@ const bookingControl = props => {
   );
 };
 
-export default bookingControl;
+BookingControl.defaultProps = { activeOutputType: "list" };
+
+BookingControl.propTypes = {
+  /**
+   * Output type list or chart
+   */
+  activeOutputType: PropTypes.string,
+  /**
+   * Modal onChange func
+   */
+  onChange: PropTypes.string.isRequired
+};
+
+export default BookingControl;

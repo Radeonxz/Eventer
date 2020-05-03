@@ -4,13 +4,13 @@ import AuthContext from "../../context/auth-context";
 import Spinner from "../../components/Spinner";
 import BookingList from "../../components/Bookings/BookingList/BookingList";
 import BookingChart from "../../components/Bookings/BookingChart/BookingChart";
-import BookingControl from "../../components/Bookings/BookingControl/BookingControl";
+import BookingControl from "../../components/Bookings/BookingControl";
 
 class BookingsPage extends Component {
   state = {
     isLoading: false,
     outputType: "list",
-    bookings: [],
+    bookings: []
   };
 
   static contextType = AuthContext;
@@ -35,7 +35,7 @@ class BookingsPage extends Component {
             }
           }
         }
-      `,
+      `
     };
 
     fetch("http://localhost:8000/graphql", {
@@ -43,8 +43,8 @@ class BookingsPage extends Component {
       body: JSON.stringify(requestBody),
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + this.context.token,
-      },
+        Authorization: "Bearer " + this.context.token
+      }
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
@@ -75,8 +75,8 @@ class BookingsPage extends Component {
         }
       `,
       variables: {
-        id: bookingId,
-      },
+        id: bookingId
+      }
     };
 
     fetch("http://localhost:8000/graphql", {
@@ -84,8 +84,8 @@ class BookingsPage extends Component {
       body: JSON.stringify(requestBody),
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + this.context.token,
-      },
+        Authorization: "Bearer " + this.context.token
+      }
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
