@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import EventItem from "../EventItem";
 
-import "./EventList.css";
+import "./styled/EventList.css";
 
 const EventList = ({ events, authUserId, onViewDetail }) => {
   const eventsList = events.map((event) => {
@@ -36,7 +36,7 @@ EventList.propTypes = {
   /**
    * Method to view event details
    */
-  onViewDetail: PropTypes.func.isRequired,
+  onViewDetail: PropTypes.func.isRequired
 };
 
 export default EventList;
