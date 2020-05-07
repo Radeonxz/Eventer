@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import "./EventItem.css";
+import "./styled/EventItem.css";
 
 const EventItem = ({
   eventId,
@@ -10,7 +10,7 @@ const EventItem = ({
   date,
   userId,
   creatorId,
-  onDetail,
+  onDetail
 }) => (
   <li key={eventId} className="events_list-item">
     <div>
@@ -32,7 +32,7 @@ const EventItem = ({
 );
 
 EventItem.defaultProps = {
-  userId: "",
+  userId: ""
 };
 
 EventItem.propTypes = {
@@ -63,7 +63,7 @@ EventItem.propTypes = {
   /**
    * Method to view event details
    */
-  onDetail: PropTypes.func.isRequired,
+  onDetail: PropTypes.func.isRequired
 };
 
 export default EventItem;
