@@ -1,32 +1,32 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
 
-import AuthContext from '../../context/auth-context';
+import AuthContext from "../../context/auth-context";
 
-import './MainNavigation.css';
+import "./Navigation.css";
 
-const mainNavigation = props => (
+const mainNavigation = (props) => (
   <AuthContext.Consumer>
-    {context => {
+    {(context) => {
       return (
-        <header className='main-navigation'>
-          <div className='main-navigation_logo'>
+        <header className="main-navigation">
+          <div className="main-navigation_logo">
             <h1>EventComp</h1>
           </div>
-          <div className='main-navigation_items'>
+          <div className="main-navigation_items">
             <ul>
               {!context.token && (
                 <li>
-                  <NavLink to='/auth'>Authenticate</NavLink>
+                  <NavLink to="/auth">Authenticate</NavLink>
                 </li>
               )}
               <li>
-                <NavLink to='/events'>Events</NavLink>
+                <NavLink to="/events">Events</NavLink>
               </li>
               {context.token && (
                 <React.Fragment>
                   <li>
-                    <NavLink to='/bookings'>Bookings</NavLink>
+                    <NavLink to="/bookings">Bookings</NavLink>
                   </li>
                   <li>
                     <button onClick={context.logout}>Logout</button>
@@ -36,7 +36,7 @@ const mainNavigation = props => (
             </ul>
           </div>
         </header>
-      )
+      );
     }}
   </AuthContext.Consumer>
 );
