@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import Spinner from "../../components/Spinner";
 import Modal from "../../components/Modal";
-import EventList from "../../components/Events/EventList/EventList";
+import EventList from "../../components/Events/EventList";
 import Backdrop from "../../components/Backdrop";
 import AuthContext from "../../context/auth-context";
 import "./Events.css";
@@ -12,7 +12,7 @@ class EventsPage extends Component {
     creating: false,
     events: [],
     selectedEvent: null,
-    isLoading: false,
+    isLoading: false
   };
 
   isActive = true;
@@ -67,8 +67,8 @@ class EventsPage extends Component {
         title: title,
         desc: description,
         price: price,
-        date: date,
-      },
+        date: date
+      }
     };
 
     fetch("http://localhost:8000/graphql", {
@@ -76,8 +76,8 @@ class EventsPage extends Component {
       body: JSON.stringify(requestBody),
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + this.context.token,
-      },
+        Authorization: "Bearer " + this.context.token
+      }
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
@@ -97,9 +97,9 @@ class EventsPage extends Component {
               date: resData.data.createEvent.date,
               price: resData.data.createEvent.price,
               creator: {
-                _id: this.context.userId,
-              },
-            },
+                _id: this.context.userId
+              }
+            }
           ];
           return { events: updatedEvents };
         });
@@ -130,15 +130,15 @@ class EventsPage extends Component {
             }
           }
         }
-      `,
+      `
     };
 
     fetch("http://localhost:8000/graphql", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
@@ -184,8 +184,8 @@ class EventsPage extends Component {
         }
       `,
       variables: {
-        id: this.state.selectedEvent._id,
-      },
+        id: this.state.selectedEvent._id
+      }
     };
 
     fetch("http://localhost:8000/graphql", {
@@ -193,8 +193,8 @@ class EventsPage extends Component {
       body: JSON.stringify(requestBody),
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + this.context.token,
-      },
+        Authorization: "Bearer " + this.context.token
+      }
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
