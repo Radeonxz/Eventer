@@ -5,7 +5,7 @@ import AuthPage from "./pages/Auth/Auth";
 import EventsPage from "./pages/Events/Events";
 import BookingsPage from "./pages/Bookings/Bookings";
 
-import MainNavigation from "./components/Navigation";
+import Navigation from "./components/Navigation";
 import AuthContext from "./context/auth-context";
 
 import "./App.css";
@@ -36,7 +36,7 @@ class App extends Component {
               logout: this.logout
             }}
           >
-            <MainNavigation />
+            <Navigation />
             <main className="main-content">
               <Switch>
                 {this.state.token && <Redirect from="/" to="/events" exact />}
