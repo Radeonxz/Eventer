@@ -5,7 +5,7 @@ import AuthContext from "../../context/auth-context";
 
 import "./Navigation.css";
 
-const mainNavigation = (props) => (
+const mainNavigation = () => (
   <AuthContext.Consumer>
     {(context) => {
       return (
