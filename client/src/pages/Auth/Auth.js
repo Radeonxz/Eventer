@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import './Auth.css';
-import AuthContext from '../../context/auth-context';
+import "./Auth.css";
+import AuthContext from "../../context/auth-context";
 
 class AuthPage extends Component {
   state = {
@@ -17,7 +17,7 @@ class AuthPage extends Component {
   }
 
   switchModelHandler = () => {
-    this.setState(prevState => {
+    this.setState((prevState) => {
       return { isLogin: !prevState.isLogin };
     });
   };
@@ -34,7 +34,7 @@ class AuthPage extends Component {
     let requestBody = {
       query: `
         query Login($email: String!, $password: String!) {
-          login(email: $email, password: $password}) {
+          login(email: $email, password: $password) {
             userId
             token
             tokenExpiration
@@ -64,41 +64,52 @@ class AuthPage extends Component {
       };
     }
 
-    fetch('http://localhost:8000/graphql', {
-      method: 'POST',
+    fetch("/graphql", {
+      method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
-    }).then(res => {
-      if (res.status !== 200 && res.status !== 201) {
-        throw new Error('Failed');
-      }
-      return res.json();
-    }).then(resData => {
-      if (resData.data.login.token) {
-        this.context.login(resData.data.login.token, resData.data.login.userId, resData.data.login.tokenExpiration);
-      }
-    }).catch(err => {
-      console.log(err);
-    });
+    })
+      .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Failed");
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        if (resData.data.login.token) {
+          this.context.login(
+            resData.data.login.token,
+            resData.data.login.userId,
+            resData.data.login.tokenExpiration
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   render() {
-    return <form className='auth-form' onSubmit={this.submitHandler} >
-      <div className='form-control'>
-        <label htmlFor='email'>Email</label>
-        <input type='email' id='email' ref={this.emailEl} />
-      </div>
-      <div className='form-control'>
-        <label htmlFor='password'>Password</label>
-        <input type='password' id='password' ref={this.passwordEl} />
-      </div>
-      <div className='form-actions'>
-        <button type='submmit'>Submit</button>
-        <button type='button' onClick={this.switchModelHandler}>Switch to {this.state.isLogin ? 'Sign Up' : 'Log In'}</button>
-      </div>
-    </form>
+    return (
+      <form className="auth-form" onSubmit={this.submitHandler}>
+        <div className="form-control">
+          <label htmlFor="email">Email</label>
+          <input type="email" id="email" ref={this.emailEl} />
+        </div>
+        <div className="form-control">
+          <label htmlFor="password">Password</label>
+          <input type="password" id="password" ref={this.passwordEl} />
+        </div>
+        <div className="form-actions">
+          <button type="submmit">Submit</button>
+          <button type="button" onClick={this.switchModelHandler}>
+            Switch to {this.state.isLogin ? "Sign Up" : "Log In"}
+          </button>
+        </div>
+      </form>
+    );
   }
 }
 

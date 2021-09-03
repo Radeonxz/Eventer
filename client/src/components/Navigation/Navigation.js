@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import AuthContext from "../../context/auth-context";
 
-import "./Navigation.css";
+import "./styled/Navigation.css";
 
 const mainNavigation = () => (
   <AuthContext.Consumer>
@@ -11,7 +11,7 @@ const mainNavigation = () => (
       return (
         <header className="main-navigation">
           <div className="main-navigation_logo">
-            <h1>EventComp</h1>
+            <h1>Eventer</h1>
           </div>
           <div className="main-navigation_items">
             <ul>

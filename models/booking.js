@@ -1,16 +1,19 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const bookingSchema = new Schema({
-  event: {
-    type: Schema.Types.ObjectId,
-    ref: 'GraphEvent'
+const bookingSchema = new Schema(
+  {
+    event: {
+      type: Schema.Types.ObjectId,
+      ref: "Event"
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User"
+    }
   },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'GraphUser'
-  }
-}, { timestamps: true });
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('GraphBooking', bookingSchema);
+module.exports = mongoose.model("Booking", bookingSchema);

@@ -53,16 +53,16 @@ class EventsPage extends Component {
 
     const requestBody = {
       query: `
-        mutation CreateEvent($title: String!, $desc: String!, $price: Float!, $date: String!) {
-          createEvent(eventInput: {title: $title, description: $desc, price: $price, date: $date}) {
-            _id
-            title
-            description
-            date
-            price
-          }
-        }
-      `,
+				mutation CreateEvent($title: String!, $desc: String!, $price: Float!, $date: String!) {
+					createEvent(eventInput: {title: $title, description: $desc, price: $price, date: $date}) {
+						_id
+						title
+						description
+						date
+						price
+					}
+				}
+			`,
       variables: {
         title: title,
         desc: description,
@@ -71,7 +71,7 @@ class EventsPage extends Component {
       }
     };
 
-    fetch("http://localhost:8000/graphql", {
+    fetch("/graphql", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
@@ -117,23 +117,23 @@ class EventsPage extends Component {
     this.setState({ isLoading: true });
     const requestBody = {
       query: `
-        query {
-          events {
-            _id
-            title
-            description
-            date
-            price
-            creator {
-              _id
-              email
-            }
-          }
-        }
-      `
+				query {
+					events {
+						_id
+						title
+						description
+						date
+						price
+						creator {
+							_id
+							email
+						}
+					}
+				}
+			`
     };
 
-    fetch("http://localhost:8000/graphql", {
+    fetch("/graphql", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
@@ -175,20 +175,20 @@ class EventsPage extends Component {
     }
     const requestBody = {
       query: `
-        mutation BookEvent($id: ID!) {
-          bookEvent(eventId: $id) {
-            _id
-            createdAt
-            updatedAt
-          }
-        }
-      `,
+				mutation BookEvent($id: ID!) {
+					bookEvent(eventId: $id) {
+						_id
+						createdAt
+						updatedAt
+					}
+				}
+			`,
       variables: {
         id: this.state.selectedEvent._id
       }
     };
 
-    fetch("http://localhost:8000/graphql", {
+    fetch("/graphql", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
