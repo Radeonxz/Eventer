@@ -25,11 +25,11 @@ app.use((req, res, next) => {
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === "production") {
-	app.use(express.static("client/build"));
+  app.use(express.static("client/build"));
 
-	app.get("*", (req, res) => {
-		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-	});
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
 }
 
 // User auth middleware for all routes
@@ -40,7 +40,7 @@ app.use(
   graphqlHttp({
     schema: graphQlSchema,
     rootValue: graphQlResolvers,
-    graphiql: true,
+    graphiql: true
   })
 );
 
@@ -48,7 +48,7 @@ app.use(
 const MongoDBOptions = {
   useNewUrlParser: true,
   useCreateIndex: true,
-  useUnifiedTopology: true,
+  useUnifiedTopology: true
 };
 mongoose
   .connect(process.env.MONGODB_URI, MongoDBOptions)

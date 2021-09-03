@@ -1,8 +1,8 @@
-const DataLoader = require('dataloader');
+const DataLoader = require("dataloader");
 
-const Event = require('../../models/event');
-const User = require('../../models/user');
-const { dateToString } = require('../../helpers/date');
+const Event = require("../../models/event");
+const User = require("../../models/user");
+const { dateToString } = require("../../helpers/date");
 
 const eventLoader = new DataLoader((eventIds) => {
   return events(eventIds);
@@ -12,13 +12,15 @@ const userLoader = new DataLoader((userIds) => {
   return User.find({ _id: { $in: userIds } });
 });
 
-const events = async eventIds => {
+const events = async (eventIds) => {
   try {
     const events = await Event.find({ _id: { $in: eventIds } });
     events.sort((a, b) => {
-      return eventIds.indexOf(a._id.toString()) - eventIds.indexOf(b._id.toString());
-    })
-    return events.map(event => {
+      return (
+        eventIds.indexOf(a._id.toString()) - eventIds.indexOf(b._id.toString())
+      );
+    });
+    return events.map((event) => {
       return transformEvent(event);
     });
   } catch (err) {
@@ -26,7 +28,7 @@ const events = async eventIds => {
   }
 };
 
-const singleEvent = async eventId => {
+const singleEvent = async (eventId) => {
   try {
     // const event = await Event.findById(eventId);
     const event = await eventLoader.load(eventId.toString());
@@ -36,7 +38,7 @@ const singleEvent = async eventId => {
   }
 };
 
-const user = async userId => {
+const user = async (userId) => {
   try {
     // const user = await User.findById(userId);
     const user = await userLoader.load(userId.toString());
@@ -51,7 +53,7 @@ const user = async userId => {
   }
 };
 
-const transformEvent = event => {
+const transformEvent = (event) => {
   return {
     ...event._doc,
     _id: event.id,
@@ -60,7 +62,7 @@ const transformEvent = event => {
   };
 };
 
-const transformBooking = booking => {
+const transformBooking = (booking) => {
   return {
     ...booking._doc,
     _id: booking.id,
