@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(isAuth);
 
 app.use(
-  "/graphql",
+  "https://eventeerr.herokuapp.com/graphql",
   graphqlHttp({
     schema: graphQlSchema,
     rootValue: graphQlResolvers,
