@@ -53,8 +53,8 @@ const MongoDBOptions = {
 mongoose
   .connect(process.env.MONGODB_URI, MongoDBOptions)
   .then(() => {
-    console.log("server is listening on 8000");
-    app.listen(8000);
+    console.log(`server is listening on: ${process.env.PORT}`);
+    app.listen(process.env.PORT);
   })
   .catch((err) => {
     console.log(err);
