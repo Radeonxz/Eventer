@@ -50,11 +50,14 @@ const MongoDBOptions = {
   useCreateIndex: true,
   useUnifiedTopology: true
 };
+
+const port = process.env.PORT || 5000;
+
 mongoose
   .connect(process.env.MONGODB_URI, MongoDBOptions)
   .then(() => {
-    console.log(`server is listening on: ${process.env.PORT || 5000}`);
-    app.listen(process.env.PORT || 5000);
+    console.log(`server is listening on: ${port}`);
+    app.listen(port);
   })
   .catch((err) => {
     console.log(err);
