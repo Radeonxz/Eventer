@@ -23,6 +23,18 @@ app.use((req, res, next) => {
   next();
 });
 
+// User auth middleware for all routes
+app.use(isAuth);
+
+app.use(
+  "/graphql",
+  graphqlHttp({
+    schema: graphQlSchema,
+    rootValue: graphQlResolvers,
+    graphiql: true
+  })
+);
+
 // Serve static assets if in production
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -31,18 +43,6 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
-
-// User auth middleware for all routes
-app.use(isAuth);
-
-app.use(
-  "https://eventeerr.herokuapp.com/graphql",
-  graphqlHttp({
-    schema: graphQlSchema,
-    rootValue: graphQlResolvers,
-    graphiql: true
-  })
-);
 
 // MongoDB, server setup
 const MongoDBOptions = {
@@ -53,8 +53,8 @@ const MongoDBOptions = {
 mongoose
   .connect(process.env.MONGODB_URI, MongoDBOptions)
   .then(() => {
-    console.log(`server is listening on: ${process.env.PORT}`);
-    app.listen(process.env.PORT);
+    console.log(`server is listening on: ${process.env.PORT || 5000}`);
+    app.listen(process.env.PORT || 5000);
   })
   .catch((err) => {
     console.log(err);
